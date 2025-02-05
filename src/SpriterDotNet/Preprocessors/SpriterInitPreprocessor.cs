@@ -21,12 +21,15 @@ namespace SpriterDotNet.Preprocessors
             {
                 entity.Spriter = spriter;
                 if (entity.ObjectInfos == null) entity.ObjectInfos = new SpriterObjectInfo[0];
-                foreach (SpriterAnimation animation in entity.Animations)
+                if (entity.Animations != null)
                 {
-                    animation.Entity = entity;
+                    foreach (SpriterAnimation animation in entity.Animations)
+                    {
+                        animation.Entity = entity;
 
-                    InitInfos(animation);
-                    InitVarDefs(animation);
+                        InitInfos(animation);
+                        InitVarDefs(animation);
+                    }
                 }
             }
         }
