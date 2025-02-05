@@ -21,24 +21,24 @@ namespace SpriterDotNet.Providers
             Dictionary<string, FrameData[]> results = new Dictionary<string, FrameData[]>();
             if (entity.Animations != null)
             {
-				foreach (SpriterAnimation anim in entity.Animations)
-				{
-					int length = (int)Math.Ceiling(anim.Length / interval);
-					FrameData[] animData = new FrameData[length];
+                foreach (SpriterAnimation anim in entity.Animations)
+                {
+                    int length = (int)Math.Ceiling(anim.Length / interval);
+                    FrameData[] animData = new FrameData[length];
 
-					for (int i = 0; i < animData.Length; ++i)
-					{
-						float time = i * interval;
-						if (time > anim.Length) time = anim.Length;
+                    for (int i = 0; i < animData.Length; ++i)
+                    {
+                        float time = i * interval;
+                        if (time > anim.Length) time = anim.Length;
 
-						ObjectPool pool = new ObjectPool(config);
-						FrameData data = new FrameDataCalculator(config, pool).GetFrameData(anim, time, interval);
-						animData[i] = data;
-					}
+                        ObjectPool pool = new ObjectPool(config);
+                        FrameData data = new FrameDataCalculator(config, pool).GetFrameData(anim, time, interval);
+                        animData[i] = data;
+                    }
 
-					results[anim.Name] = animData;
-				}
-			}
+                    results[anim.Name] = animData;
+                }
+            }
             return results;
         }
 
